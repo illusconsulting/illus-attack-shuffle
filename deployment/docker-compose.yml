@@ -1,0 +1,157 @@
+version: '3.8'
+
+services:
+  # Application Container
+  app:
+    image: cgr.dev/chainguard/rust
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BINARY_URL: ${BINARY_URL}
+        APP_BINARY_NAME: ${APP_BINARY_NAME}
+        APP_PORT: ${APP_PORT}
+        APP_LOG_LEVEL: ${APP_LOG_LEVEL}
+        LOG_FILE_PATH: ${LOG_FILE_PATH}
+        APP_CMD: ${APP_CMD}
+    environment:
+      - APP_PORT=${APP_PORT}
+      - APP_LOG_LEVEL=${APP_LOG_LEVEL}
+      - LOG_FILE_PATH=${LOG_FILE_PATH}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app-router.rule=Host(`${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.app-router.entrypoints=websecure"
+      - "traefik.http.routers.app-router.tls=true"
+      - "traefik.http.routers.app-router.middlewares=authentik@docker"
+      - "traefik.http.services.app-service.loadbalancer.server.port=${APP_PORT}"
+    networks:
+      - backend
+
+  # Cloudflared Tunnel Client
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    environment:
+      - TUNNEL_ID=${CLOUDFLARE_TUNNEL_ID}
+      - TUNNEL_SECRET=${CLOUDFLARE_TUNNEL_SECRET}
+      - CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID}
+    volumes:
+      - ./cloudflared/config.yml:/etc/cloudflared/config.yml
+    networks:
+      - backend
+
+  # Traefik Reverse Proxy
+  traefik:
+    image: traefik:latest
+    command:
+      - "--api.insecure=${TRAEFIK_API_DEBUG}"
+      - "--log.level=${TRAEFIK_LOG_LEVEL}"
+      - "--entrypoints.web.address=:${TRAEFIK_HTTP_PORT}"
+      - "--entrypoints.websecure.address=:${TRAEFIK_HTTPS_PORT}"
+      - "--providers.docker"
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.cloudflare.acme.email=${CLOUDFLARE_EMAIL}"
+      - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
+    environment:
+      - CF_API_EMAIL=${CLOUDFLARE_EMAIL}
+      - CF_API_KEY=${CLOUDFLARE_API_KEY}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik-router.rule=Host(`traefik.${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.traefik-router.entrypoints=websecure"
+      - "traefik.http.routers.traefik-router.tls.certresolver=cloudflare"
+      - "traefik.http.services.traefik-service.loadbalancer.server.port=8080"
+    ports:
+      - "${TRAEFIK_HTTP_PORT}:${TRAEFIK_HTTP_PORT}"
+      - "${TRAEFIK_HTTPS_PORT}:${TRAEFIK_HTTPS_PORT}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - backend
+
+  # CrowdSec Bouncer
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    environment:
+      - CROWDSEC_API_KEY=${CROWDSEC_API_KEY}
+      - CROWDSEC_API_URL=${CROWDSEC_API_URL}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.crowdsec-router.rule=Host(`crowdsec.${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.crowdsec-router.entrypoints=websecure"
+      - "traefik.http.routers.crowdsec-router.tls.certresolver=cloudflare"
+    networks:
+      - backend
+
+  # Authentik Outpost
+  authentik:
+    image: ghcr.io/goauthentik/outpost
+    environment:
+      - AUTHENTIK_OUTPOST_NAME=${APP_NAME}-outpost
+      - AUTHENTIK_OUTPOST_TOKEN=${AUTHENTIK_OUTPOST_TOKEN}
+      - AUTHENTIK_HOST=${AUTHENTIK_SERVER_URL}
+      - AUTHENTIK_PROVIDER_ID=${AUTHENTIK_PROVIDER_ID}
+      - AUTHENTIK_REDIRECT_URIS=https://${TRAEFIK_DOMAIN}/app/
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.authentik-outpost-router.rule=Host(`authentik.${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.authentik-outpost-router.entrypoints=websecure"
+      - "traefik.http.routers.authentik-outpost-router.tls.certresolver=cloudflare"
+      - "traefik.http.middlewares.authentik@docker.forwardauth.address=http://authentik:9000/outpost.goauthentik.io/auth/traefik"
+      - "traefik.http.middlewares.authentik.forwardauth.trustForwardHeader=true"
+    networks:
+      - backend
+
+  # Wallarm API Firewall
+  wallarm:
+    image: wallarm/api-firewall:latest
+    environment:
+      - WALLARM_API_URL=${WALLARM_API_URL}
+      - WALLARM_API_TOKEN=${WALLARM_API_TOKEN}
+      - WALLARM_LOGGING=${WALLARM_LOGGING}
+      - WALLARM_MODE=${WALLARM_MODE}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wallarm-router.rule=Host(`wallarm.${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.wallarm-router.entrypoints=websecure"
+      - "traefik.http.routers.wallarm-router.tls.certresolver=cloudflare"
+    networks:
+      - backend
+
+  # ArangoDB (Database)
+  arangodb:
+    image: arangodb:latest
+    environment:
+      - ARANGODB_ROOT_USERNAME=${ARANGODB_ROOT_USERNAME}
+      - ARANGODB_ROOT_PASSWORD=${ARANGODB_ROOT_PASSWORD}
+      - ARANGODB_DATABASE=${ARANGODB_DATABASE}
+    ports:
+      - "8529:8529"
+    networks:
+      - backend
+    volumes:
+      - arango_data:/var/lib/arangodb3
+
+  # Log Ingestion Service
+  log_ingestion:
+    image: your_log_ingestion_service_image
+    environment:
+      - LOG_SERVICE_HOST=${LOG_SERVICE_HOST}
+      - LOG_SERVICE_PORT=${LOG_SERVICE_PORT}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.log-ingestion-router.rule=Host(`logs.${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.log-ingestion-router.entrypoints=websecure"
+      - "traefik.http.routers.log-ingestion-router.tls.certresolver=cloudflare"
+    networks:
+      - backend
+
+# Define volumes
+volumes:
+  arango_data:
+
+# Define networks
+networks:
+  backend:
+    driver: bridge

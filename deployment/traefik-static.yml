@@ -1,0 +1,45 @@
+# traefik-static.yml
+
+# Enable Traefik dashboard (insecure mode is only for development, use secure access in production)
+api:
+  dashboard: true
+  insecure: false  # Set to true for testing only; should be false in production
+
+# Define entry points for HTTP and HTTPS
+entryPoints:
+  web:
+    address: ":${TRAEFIK_HTTP_PORT:-80}"
+  websecure:
+    address: ":${TRAEFIK_HTTPS_PORT:-443}"
+
+# Enable providers
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false  # Services must be explicitly exposed with "traefik.enable=true"
+
+  file:
+    filename: "/etc/traefik/traefik-dynamic.yml"
+    watch: true
+
+# Configure Cloudflare for HTTPS certificate resolution
+certificatesResolvers:
+  cloudflare:
+    acme:
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 0
+      email: "${CLOUDFLARE_EMAIL}"
+      storage: "/letsencrypt/acme.json"
+
+# Enable CrowdSec Bouncer Plugin (ensure that the plugin is installed)
+experimental:
+  plugins:
+    crowdsec-bouncer:
+      moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
+      version: "v1.3.5"
+
+# Logging configuration
+log:
+  level: "${TRAEFIK_LOG_LEVEL:-INFO}"
+  filePath: "/var/log/traefik/traefik.log"

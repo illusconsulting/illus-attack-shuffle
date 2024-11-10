@@ -1,0 +1,51 @@
+[
+  {
+    "process_weight_keywords": [
+      "Process",
+      "Command",
+      "Script",
+      "WMI",
+      "Module",
+      "Pipe",
+      "Service"
+    ]
+  },
+  {
+    "network_weight_keywords": [
+      "Network",
+      "Firewall"
+    ]
+  },
+  {
+    "file_weight_keywords": [
+      "File",
+      "Group",
+      "Logon",
+      "Schedule",
+      "User",
+      "Registry",
+      "Active",
+      "Application"
+    ]
+  },
+  {
+    "cloud_weight_keywords": [
+      "Cloud",
+      "Cluster",
+      "Container",
+      "Image",
+      "Instance",
+      "Pod",
+      "Snapshot",
+      "Volume"
+    ]
+  },
+  {
+    "hardware_weight_keywords": [
+      "Drive",
+      "Firmware",
+      "Host",
+      "Kernel"
+    ]
+  }
+]
