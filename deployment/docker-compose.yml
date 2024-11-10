@@ -23,7 +23,7 @@ services:
       - "traefik.http.routers.app-router.rule=Host(`${TRAEFIK_DOMAIN}`)"
       - "traefik.http.routers.app-router.entrypoints=websecure"
       - "traefik.http.routers.app-router.tls=true"
-      - "traefik.http.routers.app-router.middlewares=authentik@docker"
+      - "traefik.http.routers.app-router.middlewares=crowdsec-bouncer@docker,authentik@docker"
       - "traefik.http.services.app-service.loadbalancer.server.port=${APP_PORT}"
     networks:
       - backend
@@ -52,6 +52,8 @@ services:
       - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.cloudflare.acme.email=${CLOUDFLARE_EMAIL}"
       - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
+      - "--experimental.plugins.crowdsec-bouncer.moduleName=github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
+      - "--experimental.plugins.crowdsec-bouncer.version=v1.3.5"
     environment:
       - CF_API_EMAIL=${CLOUDFLARE_EMAIL}
       - CF_API_KEY=${CLOUDFLARE_API_KEY}
@@ -61,6 +63,8 @@ services:
       - "traefik.http.routers.traefik-router.entrypoints=websecure"
       - "traefik.http.routers.traefik-router.tls.certresolver=cloudflare"
       - "traefik.http.services.traefik-service.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.crowdsec-bouncer.plugin.crowdsec-bouncer-traefik-plugin.apiUrl=http://crowdsec:8080"
+      - "traefik.http.middlewares.crowdsec-bouncer.plugin.crowdsec-bouncer-traefik-plugin.apiKey=${CROWDSEC_BOUNCER_API_KEY}"
     ports:
       - "${TRAEFIK_HTTP_PORT}:${TRAEFIK_HTTP_PORT}"
       - "${TRAEFIK_HTTPS_PORT}:${TRAEFIK_HTTPS_PORT}"
@@ -70,17 +74,16 @@ services:
     networks:
       - backend
 
-  # CrowdSec Bouncer
+  # CrowdSec Service
   crowdsec:
     image: crowdsecurity/crowdsec:latest
     environment:
-      - CROWDSEC_API_KEY=${CROWDSEC_API_KEY}
-      - CROWDSEC_API_URL=${CROWDSEC_API_URL}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.crowdsec-router.rule=Host(`crowdsec.${TRAEFIK_DOMAIN}`)"
-      - "traefik.http.routers.crowdsec-router.entrypoints=websecure"
-      - "traefik.http.routers.crowdsec-router.tls.certresolver=cloudflare"
+      - COLLECTIONS=crowdsecurity/traefik
+    volumes:
+      - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - ./crowdsec/data:/var/lib/crowdsec/data
+      - ./crowdsec/config:/etc/crowdsec
+      - /var/log/traefik:/var/log/traefik:ro
     networks:
       - backend
 

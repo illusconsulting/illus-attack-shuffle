@@ -28,19 +28,16 @@ foreach ($technique in $attackTechniquesData) {
     }
 }
 
-# Convert the hashtable to an array of PSCustomObjects for better output formatting
-$assetTypeArray = @()
-foreach ($key in $assetTypesToTechniques.Keys) {
-    $assetTypeArray += [PSCustomObject]@{
-        AssetType = $key
-        TechniqueIDs = $assetTypesToTechniques[$key] | Sort-Object -Unique
-    }
-}
+# Convert the hashtable to JSON format where the asset type is the key
+$outputJson = $assetTypesToTechniques | ConvertTo-Json -Depth 5
 
 # Define the path to the output JSON file
 $outputJsonPath = "asset_types_to_techniques_output.json"
 
 # Output the result to a JSON file
+$outputJson | Set-Content -Path $outputJsonPath
+
+Write-Host "JSON file generated successfully: $outputJsonPath"
 $assetTypeArray | ConvertTo-Json -Depth 5 | Set-Content -Path $outputJsonPath
 
 Write-Host "JSON file generated successfully: $outputJsonPath"
