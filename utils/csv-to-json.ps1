@@ -1,7 +1,7 @@
 # Define the file paths for the input CSV and output JSON
 $csvFilePath = "C:\Users\shove\OneDrive\Documents\GitHub\illus-attack-shuffle\remove\techniques-to-asset-types.csv"
 $jsonFilePath = "C:\Users\shove\OneDrive\Documents\GitHub\illus-attack-shuffle\data\techniques-to-asset-types.json"
-$assetTypesJsonFilePath = "C:\Users\shove\OneDrive\Documents\GitHub\illus-attack-shuffle\data\techniques-by-asset-types.json"
+#$assetTypesJsonFilePath = "C:\Users\shove\OneDrive\Documents\GitHub\illus-attack-shuffle\data\techniques-by-asset-types.json"
 
 # Import the CSV file
 $data = Import-Csv -Path $csvFilePath
@@ -38,7 +38,7 @@ foreach ($row in $data) {
     $defensesBypassed = CleanValue($row.'defenses bypassed' -split ",\s*")
     $permissionsRequired = CleanValue($row.'permissions required' -split ",\s*")
     $effectivePermissions = CleanValue($row.'effective permissions' -split ",\s*")
-    $affectedAssetTypes = CleanValue($row.'affected asset types' -split ",\s*")
+    #$affectedAssetTypes = CleanValue($row.'affected asset types' -split ",\s*")
 
     # Create an object with properties for each column, converting where necessary
     $jsonOutput[$row.ID] = @{
@@ -55,9 +55,10 @@ foreach ($row in $data) {
         "system requirements" = CleanValue($row.'system requirements')
         "impact type" = CleanValue($row.'impact type')
         "effective permissions" = $effectivePermissions
-        "affected asset types" = $affectedAssetTypes
+        #"affected asset types" = $affectedAssetTypes
     }
 
+    <#
     # Populate assetTypeDict with affected asset types and their associated IDs
     foreach ($assetType in $affectedAssetTypes) {
         if ($assetType -ne $null) {  # Ensure asset type is not blank
@@ -69,7 +70,7 @@ foreach ($row in $data) {
                 $assetTypeDict[$assetType] += $row.ID
             }
         }
-    }
+    }#>
 }
 
 # Convert the main data to JSON and save to the first JSON file

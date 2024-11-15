@@ -1,0 +1,110 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Asset Techniques API",
+      "version": "1.0.0",
+      "description": "API to retrieve deduplicated MITRE ATT&CK techniques for specified asset types and environments."
+    },
+    "paths": {
+      "/techniques": {
+        "post": {
+          "summary": "Retrieve attack techniques for specified assets and environments",
+          "description": "This endpoint accepts an array of asset types and environments and returns a deduplicated list of relevant attack techniques grouped by asset and environment.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "asset_type": {
+                        "type": "string",
+                        "example": "Windows Server OS"
+                      },
+                      "environment": {
+                        "type": "string",
+                        "example": "Azure"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "A list of attack techniques grouped by asset type and environment.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {
+                        "environment": {
+                          "type": "string",
+                          "example": "Azure"
+                        },
+                        "techniques": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "T1548"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request due to invalid input."
+            },
+            "500": {
+              "description": "Server error due to processing issues."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "AssetEnvironmentRequest": {
+          "type": "object",
+          "properties": {
+            "asset_type": {
+              "type": "string",
+              "example": "Linux Server OS"
+            },
+            "environment": {
+              "type": "string",
+              "example": "Retail"
+            }
+          }
+        },
+        "TechniquesResponse": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "environment": {
+                "type": "string",
+                "example": "Azure"
+              },
+              "techniques": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "T1548"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
