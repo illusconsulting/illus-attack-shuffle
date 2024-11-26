@@ -74,11 +74,11 @@ attack-shuffle/
 C4Context
   title Attack Shuffle Context Diagram
 
-  Boundary(Client) {
+  Boundary(Client, "Client System") {
     Person(ClientUser, "Consulting User", "Internal consultant using the application for model creation and analysis.")
   }
 
-  Boundary(InternalSystem) {
+  Boundary(InternalSystem, "Internal System") {
     System(AttackShuffle, "Attack Shuffle Application", "Provides APIs and microservices for model management.")
     System_Ext(ArangoDB, "ArangoDB Server", "Database for managing models, documents, edges, and reporting.")
   }
@@ -95,7 +95,7 @@ C4Context
 C4Container
     title Container diagram for Attack Shuffle
 
-    Boundary(illlusConsulting, "Illus Consulting") {
+    Boundary(illusConsulting, "Illus Consulting") {
         Person(ClientUser, "Consulting User", "Uses the application to create and manage models for consulting engagements.")
     }
 
