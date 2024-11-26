@@ -1,0 +1,33 @@
+services:
+  arangodb:
+    image: arangodb:latest
+    container_name: attack-shuffle-arangodb
+    environment:
+      - ARANGO_ROOT_PASSWORD=${ARANGO_ROOT_PASSWORD}
+    ports:
+      - "8529:8529"
+    volumes:
+      - arangodb-data:/var/lib/arangodb3
+      - ./arangodb/init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  attack-shuffle-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: attack-shuffle-app
+    environment:
+      - ARANGO_HOST=arangodb
+      - ARANGO_PORT=8529
+      - ARANGO_DATABASE=attack_shuffle
+      - ARANGO_ROOT_PASSWORD=${ARANGO_ROOT_PASSWORD}
+      - FOXX_SERVICES_DIRECTORY=./services
+    volumes:
+      - ./services:/usr/src/app/services
+      - ./logs:/usr/src/app/logs
+    depends_on:
+      - arangodb
+    restart: unless-stopped
+
+volumes:
+  arangodb-data:

@@ -1,0 +1,33 @@
+{
+    "name": "security-and-access",
+    "version": "1.0.0",
+    "description": "A Foxx service for user authentication, JWT token management, and access control in the Attack Shuffle project.",
+    "author": "Illus Consulting",
+    "license": "GPL-3.0",
+    "main": "index.js",
+    "engines": {
+      "arangodb": "^3.9.0"
+    },
+    "scripts": {
+      "setup": "echo 'No setup required.'",
+      "teardown": "echo 'No teardown required.'"
+    },
+    "dependencies": {
+      "@arangodb/foxx/jwt": "^3.9.0",
+      "@arangodb/crypto": "^3.9.0"
+    },
+    "configuration": {
+      "tokenSecret": {
+        "type": "string",
+        "default": "supersecrettoken",
+        "description": "The secret key used to sign JWT tokens."
+      },
+      "tokenExpiration": {
+        "type": "number",
+        "default": 3600,
+        "description": "The expiration time for JWT tokens in seconds (default: 1 hour)."
+      }
+    },
+    "tests": false
+  }
+  
