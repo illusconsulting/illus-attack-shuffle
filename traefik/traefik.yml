@@ -1,0 +1,26 @@
+# Static configuration for Traefik
+entryPoints:
+  web:
+    address: ":80"              # HTTP entry point for all services
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock" # Access Docker API
+    exposedByDefault: false                 # Require explicit exposure for services
+
+log:
+  level: INFO                            # Log level
+  filePath: "/traefik/logs/traefik.log"  # Path to log file
+
+api:
+  dashboard: true                        # Enable Traefik dashboard
+  insecure: true                         # Enable without authentication (for development)
+
+accessLog:
+  filePath: "/traefik/logs/access.log"   # Access log for requests
+  format: json                           # Log format
+
+# Enable dynamic configuration
+dynamicConfiguration:
+  file:
+    filename: "/traefik/dynamic/dynamic-config.yml"

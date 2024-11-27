@@ -18,6 +18,13 @@ The project is organized as follows:
 ```
 attack-shuffle/
 ├── docker-compose.yml
+├── traefik/                    # Traefik configuration folder
+│   ├── traefik.yml             # Static Traefik configuration
+│   ├── dynamic/                # Folder for dynamic Traefik configurations
+│   │   ├── dynamic-config.yml  # Dynamic Traefik rules (e.g., middleware, routers)
+│   │   └── certificates/       # (Optional) Directory for TLS certificates
+│   ├── logs/                   # (Optional) Logs directory for Traefik
+│   │   └── traefik.log         # Log file for debugging (optional)
 ├── arangodb/
 │   ├── init/
 │   │   ├── init-database.js      # Initializes the database
@@ -59,6 +66,19 @@ attack-shuffle/
 │   ├── arango.env                # Environment variables for ArangoDB
 │   ├── foxx.env                  # Environment variables for Foxx services
 │   └── backup-config.json        # Configuration for backup/restore
+├── frontend/                     # New Vue.js front-end folder
+│   ├── public/                   # Static assets (index.html, favicon, etc.)
+│   ├── src/                      # Vue.js application source
+│   │   ├── assets/               # Images, stylesheets, etc.
+│   │   ├── components/           # Reusable Vue components
+│   │   ├── layouts/              # Shared page layouts
+│   │   ├── pages/                # Page-level components
+│   │   ├── router/               # Vue Router configuration
+│   │   ├── store/                # Vuex store (state management)
+│   │   ├── utils/                # Utility functions (e.g., API requests)
+│   │   ├── App.vue               # Root Vue component
+│   │   └── main.js               # Vue.js entry point
+│   └── package.json              # Front-end dependencies
 ├── logs/
 │   └── .gitkeep                  # Placeholder to ensure the directory exists
 └── README.md
