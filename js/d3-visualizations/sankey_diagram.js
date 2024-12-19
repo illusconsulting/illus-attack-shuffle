@@ -1,5 +1,5 @@
 // js/d3-visualizations/sankey_diagram.js
-import { select, sankey, sankeyLinkHorizontal, scaleOrdinal, schemeCategory10, event, zoom} from 'd3';
+//import { select, sankey, sankeyLinkHorizontal, scaleOrdinal, schemeCategory10, event, zoom} from 'd3';
 import { createTooltip, showTooltip, hideTooltip } from './visualization_helpers.js';
 
 const tooltip = createTooltip(container, "<div>Tooltip content</div>");

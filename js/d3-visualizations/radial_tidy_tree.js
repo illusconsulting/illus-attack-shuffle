@@ -1,5 +1,5 @@
 // js/d3-visualizations/radial_tidy_tree.js
-import { select, tree, hierarchy, linkRadial, zoom, event,  } from 'd3';
+//import { select, tree, hierarchy, linkRadial, zoom, event,  } from 'd3';
 import { createTooltip, showTooltip, hideTooltip } from './visualization_helpers.js';
 
 const tooltip = createTooltip(container, "<div>Tooltip content</div>");

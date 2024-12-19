@@ -1,5 +1,5 @@
 // js/d3-visualizations/visualization_helpers.js
-import { select } from 'd3';
+//import { select } from 'd3';
 
 function createTooltip(container, tooltipContent) {
     const tooltip = select(container)
