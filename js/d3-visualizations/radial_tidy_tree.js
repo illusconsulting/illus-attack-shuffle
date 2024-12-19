@@ -15,7 +15,7 @@ function renderRadialTidyTree(container, data, config) {
     const width = container.offsetWidth - margin.left - margin.right;
     const height = container.offsetHeight - margin.top - margin.bottom;
     const radius = Math.min(width, height) / 2 - 100;
-    const i = 0;
+    let i = 0;
     let duration = 750;
     let root;
 

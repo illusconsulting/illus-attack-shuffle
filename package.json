@@ -1,0 +1,16 @@
+{
+  "name": "illus-attack-shuffle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild js/app.js --bundle --outfile=dist/bundle.js --platform=browser --format=esm --minify --external:d3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.20.1",
+    "js-yaml": "^4.1.0"
+  }
+}

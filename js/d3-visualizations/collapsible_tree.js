@@ -14,7 +14,7 @@ function renderCollapsibleTree(container, data, config) {
     const margin = {top: 20, right: 90, bottom: 30, left: 90};
     const width = container.offsetWidth - margin.left - margin.right;
     const height = container.offsetHeight - margin.top - margin.bottom;
-    const i = 0;
+    let i = 0;
     let duration = 750;
     let root;
 
