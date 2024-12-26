@@ -45,23 +45,23 @@
           emulationData: null,
           techniqueMappings: {},
           emulationUrls: {
-            'APT29': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/apt29/Emulation_Plan/yaml/APT29.yaml',
-            'Carbanak': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/carbanak/Emulation_Plan/yaml/Carbanak.yaml',
-            'FIN6': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/fin6/Emulation_Plan/yaml/FIN6.yaml',
-            'FIN7': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/fin7/Emulation_Plan/yaml/Fin7.yaml',
-            'Menupass': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/menu_pass/Emulation_Plan/yaml/menupass.yaml',
-            'Oilrig': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/oilrig/Emulation_Plan/yaml/oilrig.yaml',
-            'Sandworm': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/sandworm/Emulation_Plan/yaml/sandworm.yaml',
-            'Turla Carbon': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/turla/Emulation_Plan/yaml/turla_carbon.yaml',
-            'Turla Snake': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/turla/Emulation_Plan/yaml/turla_snake.yaml',
-            'Wizard Spider': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/wizard_spider/Emulation_Plan/yaml/wizard_spider.yaml'
+            'APT29': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/apt29/Emulation_Plan/yaml/APT29.yaml',
+            'Carbanak': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/carbanak/Emulation_Plan/yaml/Carbanak.yaml',
+            'FIN6': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/fin6/Emulation_Plan/yaml/FIN6.yaml',
+            'FIN7': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/fin7/Emulation_Plan/yaml/Fin7.yaml',
+            'Menupass': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/menu_pass/Emulation_Plan/yaml/menupass.yaml',
+            'Oilrig': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/oilrig/Emulation_Plan/yaml/oilrig.yaml',
+            'Sandworm': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/sandworm/Emulation_Plan/yaml/sandworm.yaml',
+            'Turla Carbon': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/turla/Emulation_Plan/yaml/turla_carbon.yaml',
+            'Turla Snake': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/turla/Emulation_Plan/yaml/turla_snake.yaml',
+            'Wizard Spider': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/wizard_spider/Emulation_Plan/yaml/wizard_spider.yaml'
           },
           mappingUrls: {
-            'AWS': 'https://github.com/center-for-threat-informed-defense/mappings-explorer/raw/refs/heads/main/mappings/aws/attack-16.1/aws-12.12.2024/enterprise/aws-12.12.2024_attack-16.1-enterprise.json',
-            'Azure': 'https://github.com/center-for-threat-informed-defense/mappings-explorer/raw/refs/heads/main/mappings/azure/attack-8.2/azure-06.29.2021/enterprise/azure-06.29.2021_attack-8.2-enterprise.json',
-            'GCP': 'https://github.com/center-for-threat-informed-defense/mappings-explorer/raw/refs/heads/main/mappings/gcp/attack-10.0/gcp-06.28.2022/enterprise/gcp-06.28.2022_attack-10.0-enterprise.json',
-            'M365': 'https://github.com/center-for-threat-informed-defense/mappings-explorer/raw/refs/heads/main/mappings/m365/attack-14.1/m365-12.11.2023/enterprise/m365-12.11.2023_attack-14.1-enterprise.json',
-            'NIST SP 800-53': 'https://github.com/center-for-threat-informed-defense/mappings-explorer/raw/refs/heads/main/mappings/nist_800_53/attack-14.1/nist_800_53-rev5/enterprise/nist_800_53-rev5_attack-14.1-enterprise.json'
+            'AWS': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/mappings-explorer/main/mappings/aws/attack-16.1/aws-12.12.2024/enterprise/aws-12.12.2024_attack-16.1-enterprise.json',
+            'Azure': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/mappings-explorer/main/mappings/azure/attack-8.2/azure-06.29.2021/enterprise/azure-06.29.2021_attack-8.2-enterprise.json',
+            'GCP': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/mappings-explorer/main/mappings/gcp/attack-10.0/gcp-06.28.2022/enterprise/gcp-06.28.2022_attack-10.0-enterprise.json',
+            'M365': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/mappings-explorer/main/mappings/m365/attack-14.1/m365-12.11.2023/enterprise/m365-12.11.2023_attack-14.1-enterprise.json',
+            'NIST SP 800-53': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/mappings-explorer/main/mappings/nist_800_53/attack-14.1/nist_800_53-rev5/enterprise/nist_800_53-rev5_attack-14.1-enterprise.json'
           },
           mappingData: {}
         };

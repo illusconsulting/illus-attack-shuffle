@@ -37,21 +37,21 @@
           showDataSources: true,
           stixData: {},
           stixUrls: {
-            'Enterprise': 'https://github.com/mitre-attack/attack-stix-data/raw/refs/heads/master/enterprise-attack/enterprise-attack.json',
-            'ICS': 'https://github.com/mitre-attack/attack-stix-data/raw/refs/heads/master/ics-attack/ics-attack.json',
-            'Mobile': 'https://github.com/mitre-attack/attack-stix-data/raw/refs/heads/master/mobile-attack/mobile-attack.json'
+            'Enterprise': 'https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json',
+            'ICS': 'https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/ics-attack/ics-attack.json',
+            'Mobile': 'https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/mobile-attack/mobile-attack.json'
           },
           emulationUrls: {
-            'APT29': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/apt29/Emulation_Plan/yaml/APT29.yaml',
-            'Carbanak': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/carbanak/Emulation_Plan/yaml/Carbanak.yaml',
-            'FIN6': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/fin6/Emulation_Plan/yaml/FIN6.yaml',
-            'FIN7': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/fin7/Emulation_Plan/yaml/Fin7.yaml',
-            'Menupass': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/menu_pass/Emulation_Plan/yaml/menupass.yaml',
-            'Oilrig': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/oilrig/Emulation_Plan/yaml/oilrig.yaml',
-            'Sandworm': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/sandworm/Emulation_Plan/yaml/sandworm.yaml',
-            'Turla Carbon': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/turla/Emulation_Plan/yaml/turla_carbon.yaml',
-            'Turla Snake': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/turla/Emulation_Plan/yaml/turla_snake.yaml',
-            'Wizard Spider': 'https://github.com/center-for-threat-informed-defense/adversary_emulation_library/raw/refs/heads/master/wizard_spider/Emulation_Plan/yaml/wizard_spider.yaml'
+            'APT29': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/apt29/Emulation_Plan/yaml/APT29.yaml',
+            'Carbanak': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/carbanak/Emulation_Plan/yaml/Carbanak.yaml',
+            'FIN6': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/fin6/Emulation_Plan/yaml/FIN6.yaml',
+            'FIN7': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/fin7/Emulation_Plan/yaml/Fin7.yaml',
+            'Menupass': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/menu_pass/Emulation_Plan/yaml/menupass.yaml',
+            'Oilrig': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/oilrig/Emulation_Plan/yaml/oilrig.yaml',
+            'Sandworm': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/sandworm/Emulation_Plan/yaml/sandworm.yaml',
+            'Turla Carbon': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/turla/Emulation_Plan/yaml/turla_carbon.yaml',
+            'Turla Snake': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/turla/Emulation_Plan/yaml/turla_snake.yaml',
+            'Wizard Spider': 'https://raw.githubusercontent.com/center-for-threat-informed-defense/adversary_emulation_library/master/wizard_spider/Emulation_Plan/yaml/wizard_spider.yaml'
           }
         };
       },
