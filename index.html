@@ -1,68 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>illus-attack-shuffle</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script type="module" src="dist/bundle.js"></script>
-    <style>
-         #file-upload-container {
-            margin-bottom: 20px;
-        }
-
-        #mapping-selections-container {
-            margin-bottom: 20px;
-        }
-
-        #visualization-controls {
-            margin-bottom: 20px;
-        }
-
-        #visualization {
-            width: 100%;
-            height: 600px; /* Set a default height */
-            border: 1px solid #ccc;
-            overflow: auto; /* Allows for scrolling if visualization is too large */
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>illus-attack-shuffle</h1>
-    </header>
-    <main>
-      <section id="file-upload-container">
-        <h2>File Upload</h2>
-        <input type="file" id="file-upload" accept=".csv,.yaml,.yml">
-      </section>
-
-      <section id="mapping-selections-container">
-        <h2>Mapping Selections</h2>
-        <div id="mapping-selections">
-            <!-- Checkboxes for mapping options will be populated by JavaScript -->
-        </div>
-      </section>
-
-      <section id="visualization-controls">
-          <h2>Visualization Options</h2>
-          <label for="visualization-selection">Select Visualization:</label>
-          <select id="visualization-selection">
-              <!-- Options for visualizations will be populated by JavaScript -->
-          </select>
-          <button id="download-all">Download All Mappings</button>
-          <button id="download-visible">Download Visualization Data</button>
-      </section>
-
-        <section id="visualization">
-          <!-- D3 visualizations will be rendered in here -->
-      </section>
-    </main>
-    <footer>
-        <p>© 2024 illus-attack-shuffle</p>
-    </footer>
-    <script type="module" src="js/app.js"></script>
-</body>
-</html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ATT&CK Shuffle</title>
+      </head>
+      <body>
+        <div id="app"></div>
+        <script type="module" src="/src/main.js"></script>
+      </body>
+    </html>
